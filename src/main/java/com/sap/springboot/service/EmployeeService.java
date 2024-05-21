@@ -1,13 +1,12 @@
 package com.sap.springboot.service;
 
 import com.sap.springboot.utils.Employee;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
 import java.util.Scanner;
-@Service
 
+@Component
 public class EmployeeService {
 
     HashSet<Employee> empSet = new HashSet<>();
@@ -41,59 +40,47 @@ public class EmployeeService {
         return empSet.toString();
     }
     //view emp based on there id
-    public void viewEmp(){
-
-        System.out.println("Enter id: ");
-        id=sc.nextInt();
+    public String viewEmp(int id){
         for(Employee emp:empSet) {
             if(emp.getId()==id) {
                 System.out.println(emp);
-                found=true;
+                found = true;
             }
-
+            if(found) {
+                return emp.toString();
+            }
         }
         if(!found) {
             System.out.println("Employee with this id is not present");
         }
+        return null;
     }
     //update the employee
-    public void updateEmployee() {
-        System.out.println("Enter id: ");
-        id=sc.nextInt();
-        boolean found=false;
+    public void updateEmployee(Employee reqEmp, int id) {
+//
+        boolean flag=false;
         for(Employee emp:empSet) {
             if(emp.getId()==id) {
-                System.out.println("Enter name: ");
-                name=sc.next();
-                System.out.println("Enter age: ");
-                age=sc.nextInt();
-                System.out.println("Enter designation: ");
-                designation=sc.next();
-                System.out.println("Enter department: ");
-                department=sc.next();
-                System.out.println("Enter new Salary");
-                sal=sc.nextDouble();
-                emp.setName(name);
-                emp.setSalary(sal);
-                emp.setAge(age);
-                emp.setDepartment(department);
-                emp.setDesignation(designation);
+                emp.setName(reqEmp.getName());
+                emp.setSalary(reqEmp.getSalary());
+                emp.setAge(reqEmp.getAge());
+                emp.setDepartment(reqEmp.getDepartment());
+                emp.setDesignation(reqEmp.getDesignation());
                 System.out.println("Updated Details of employee are: ");
                 System.out.println(emp);
-                found=true;
+                flag=true;
             }
         }
-        if(!found) {
+        if(!flag) {
             System.out.println("Employee is not present");
         }
         else {
             System.out.println("Employee details updated successfully !!");
+            System.out.println(empSet);
         }
     }
     //delete emp
-    public void deleteEmp() {
-        System.out.println("Enter id");
-        id=sc.nextInt();
+    public void deleteEmp(int id) {
         boolean found=false;
         Employee empdelete=null;
         for(Employee emp:empSet) {
@@ -111,26 +98,11 @@ public class EmployeeService {
         }
     }
     //add emp
-    public void addEmp() {
-        System.out.println("Enter id:");
-        id=sc.nextInt();
-        System.out.println("Enter name");
-        name=sc.next();
-        System.out.println("Enter age");
-        age=sc.nextInt();
-        System.out.println("enter Designation");
-        designation=sc.next();
-        System.out.println("Enter Department");
-        department=sc.next();
-        System.out.println("Enter sal");
-        sal=sc.nextDouble();
-
-        Employee emp = new Employee(id, name, age, designation, department, sal);
-
-        empSet.add(emp);
-        System.out.println(emp);
+    public void addEmployee(Employee employee){
+        empSet.add(employee);
         System.out.println("Employee added successfully");
-    }
+        System.out.println(empSet);
+    };
 
 }
 

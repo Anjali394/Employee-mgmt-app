@@ -1,6 +1,5 @@
 package com.sap.springboot.utils;
 
-
 public class Employee {
 
     private int id;
@@ -60,4 +59,5 @@ public class Employee {
         this.department = department;
         this.salary = salary;
     }
+
 }
