@@ -3,7 +3,6 @@ package com.sap.springboot.controller;
 import com.sap.springboot.service.EmployeeService;
 import com.sap.springboot.utils.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
