@@ -4,7 +4,7 @@ import com.sap.springboot.utils.Employee;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
-import java.util.Scanner;
+import java.util.Set;
 
 @Component
 public class EmployeeService {
@@ -16,14 +16,6 @@ public class EmployeeService {
     Employee emp3=new Employee(103, "Bharat", 20, "DevOps Eng","Admin", 5000);
     Employee emp4=new Employee(104, "Shatrughna", 27, "System Eng","CO",  70000);
 
-    Scanner sc=new Scanner(System.in);
-    boolean found=false;
-    int id;
-    String name;
-    int age;
-    String department;
-    String designation;
-    double sal;
 
     public EmployeeService() {
         empSet.add(emp1);
@@ -41,19 +33,22 @@ public class EmployeeService {
     }
     //view emp based on there id
     public String viewEmp(int id){
+        boolean found=false;
+        Set<Employee> newSet = new HashSet<>();
         for(Employee emp:empSet) {
             if(emp.getId()==id) {
-                System.out.println(emp);
+                newSet.add(emp);
+                System.out.println("Found Employee: " + emp);
                 found = true;
-            }
-            if(found) {
-                return emp.toString();
+                break;
             }
         }
         if(!found) {
             System.out.println("Employee with this id is not present");
+        } else {
+            return newSet.toString();
         }
-        return null;
+        return "Employee with this id not found";
     }
     //update the employee
     public void updateEmployee(Employee reqEmp, int id) {
